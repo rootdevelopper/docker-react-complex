@@ -1,0 +1,48 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+tmp
+dist
+out-tsc
+
+# built assets
+/public/environment.js
+/src/version.ts
+/public/build.json
+
+# dependencies
+node_modules
+bower_components
+local.log
+
+# IDEs and editors
+/.idea
+/.vscode
+.project
+.classpath
+*.launch
+.settings/
+.editorconfig
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# bdd
+/test/bdd/*.js
+
+#System Files
+.DS_Store
+Thumbs.db
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# Locally Compiles Environment File
+environments/environment.local.ts
