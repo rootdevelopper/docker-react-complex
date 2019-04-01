@@ -3,35 +3,33 @@ services:
   - docker
 
 before_install:
-  - docker build -t react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t rootdevelopper/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run react-test npm test -- --coverage
+  - docker run rootdevelopper/react-test npm test -- --coverage
 
-after_succes:
-  - docker build -t rootdevelopper/complex-client ./client
-  - docker build -t rootdevelopper/complex-nginx  ./nginx
-  - docker build -t rootdevelopper/complex-server ./server
-  - docker build -t rootdevelopper/complex-worker ./worker
-
-  #docker login
+after_success:
+  - docker build -t rootdevelopper/multi-client ./client
+  - docker build -t rootdevelopper/multi-nginx ./nginx
+  - docker build -t rootdevelopper/multi-server ./server
+  - docker build -t rootdevelopper/multi-worker ./worker
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-  #push images to docker hub
-  - docker push rootdevelopper/complex-client
-  - docker push rootdevelopper/complex-nginx
-  - docker push rootdevelopper/complex-server
-  - docker push rootdevelopper/complex-worker
+  # Take those images and push them to docker hub
+  - docker push rootdevelopper/multi-client
+  - docker push rootdevelopper/multi-nginx
+  - docker push rootdevelopper/multi-server
+  - docker push rootdevelopper/multi-worker
 
 # deploy:
 #   provider: elasticbeanstalk
 #   region: us-west-1
 #   app: multi-docker
-#   env: Multidocker-env
-#   bucket_name: elasticbeanstalk-us-west-1-mybucketnumber
+#   env: MultiDocker-env
+#   bucket_name: elasticbeanstalk-us-west-1-bucketnumber
 #   bucket_path: docker-multi
 #   on:
-#       branch: master
+#     branch: master
 #   access_key_id: $AWS_ACCESS_KEY
 #   secret_access_key:
 #     secure: $AWS_SECRET_KEY
